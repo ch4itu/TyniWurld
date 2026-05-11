@@ -1,0 +1,11 @@
+.DS_Store
+.grok/
+node_modules/
+*.log
+/.playwright-mcp
+
+dist/
+*.zip
+
+# Local Netlify folder
+.netlify

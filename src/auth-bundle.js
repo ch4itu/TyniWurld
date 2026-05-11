@@ -1,0 +1,31 @@
+import {
+  login,
+  signup,
+  logout,
+  getUser,
+  getSettings,
+  handleAuthCallback,
+  onAuthChange,
+  oauthLogin,
+  requestPasswordRecovery,
+  updateUser,
+  AUTH_EVENTS,
+  AuthError,
+  MissingIdentityError,
+} from '@netlify/identity';
+
+window.NetlifyAuth = {
+  login,
+  signup,
+  logout,
+  getUser,
+  getSettings,
+  handleAuthCallback,
+  onAuthChange,
+  oauthLogin,
+  requestPasswordRecovery,
+  updateUser,
+  AUTH_EVENTS,
+  AuthError,
+  MissingIdentityError,
+};
