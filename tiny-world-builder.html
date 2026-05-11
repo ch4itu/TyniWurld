@@ -489,135 +489,6 @@
     .welcome-tips { grid-template-columns: 1fr; }
   }
 
-  /* -------- auth modal -------- */
-  .auth-modal {
-    position: fixed; inset: 0;
-    background: var(--bg);
-    z-index: 100;
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px;
-  }
-  .auth-modal[hidden] { display: none; }
-  .auth-card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 32px 28px 24px;
-    width: min(400px, 100%);
-    box-shadow: var(--shadow);
-    display: flex; flex-direction: column; gap: 16px;
-  }
-  .auth-card .auth-title {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 26px;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    text-align: center;
-  }
-  .auth-card .auth-title em {
-    font-style: italic;
-    color: #a08454;
-  }
-  .auth-card .auth-subtitle {
-    text-align: center;
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: -8px;
-  }
-  .auth-card label {
-    display: flex; flex-direction: column; gap: 4px;
-    font-size: 12px; font-weight: 500; color: var(--muted);
-  }
-  .auth-card input[type="email"],
-  .auth-card input[type="password"],
-  .auth-card input[type="text"] {
-    font: inherit;
-    font-size: 14px;
-    color: var(--ink);
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 10px 12px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .auth-card input:focus {
-    border-color: #b89c5e;
-  }
-  .auth-btn {
-    background: var(--ink);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 11px 16px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.12s, transform 0.08s;
-  }
-  .auth-btn:hover { opacity: 0.88; }
-  .auth-btn:active { transform: translateY(1px); }
-  .auth-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  .auth-link {
-    background: none; border: none;
-    color: var(--accent);
-    font: inherit; font-size: 13px;
-    cursor: pointer;
-    padding: 0;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .auth-link:hover { color: var(--ink); }
-  .auth-footer {
-    text-align: center;
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .auth-error {
-    background: #fdf2f0;
-    border: 1px solid #f0d2cc;
-    border-radius: 8px;
-    padding: 8px 10px;
-    font-size: 12px;
-    color: #b84838;
-  }
-  .auth-error[hidden] { display: none; }
-  .auth-success {
-    background: #f0f7ec;
-    border: 1px solid #c8dfc0;
-    border-radius: 8px;
-    padding: 8px 10px;
-    font-size: 12px;
-    color: #3d7a2a;
-  }
-  .auth-success[hidden] { display: none; }
-  .auth-form[hidden] { display: none; }
-  .auth-divider {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 12px; color: var(--muted);
-  }
-  .auth-divider::before,
-  .auth-divider::after {
-    content: ''; flex: 1; height: 1px; background: var(--line);
-  }
-  .auth-google-btn {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    background: #fff;
-    color: var(--ink);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 10px 16px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.12s, border-color 0.15s;
-  }
-  .auth-google-btn:hover { background: #fafaf8; border-color: #ccc; }
-  .auth-google-btn:active { transform: translateY(1px); }
-  .auth-google-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-  .auth-oauth-section[hidden] { display: none; }
 
   #cloud-layer {
     position: fixed;
@@ -726,55 +597,16 @@
     <button class="btn" id="generate" title="Generate world from a prompt" hidden>✨ Generate</button>
     <button class="btn" id="render-settings" title="Render settings">Settings</button>
     <button class="btn" id="clear">Clear</button>
-    <button class="btn" id="account-btn" hidden>My Account</button>
-    <button class="btn" id="auth-logout-btn" hidden>Sign out</button>
+    <button class="btn" id="account-btn">My Builds</button>
   </div>
 
   <div id="account-modal" class="modal" hidden>
     <form class="modal-card" role="dialog" aria-labelledby="account-title" onsubmit="return false">
       <div class="modal-head">
-        <strong id="account-title">My Account</strong>
+        <strong id="account-title">My Builds</strong>
         <button class="modal-close" id="account-close" title="Close">×</button>
       </div>
-      <div class="tab-bar">
-        <button type="button" id="tab-profile" class="active">Profile</button>
-        <button type="button" id="tab-saves">My Builds</button>
-      </div>
-      <div id="panel-profile">
-        <div class="profile-section">
-          <label>Username
-            <input type="text" id="profile-username" autocomplete="username" placeholder="lowercase_name" />
-            <div class="profile-hint">Unique public handle. 3-24 chars: lowercase letters, numbers, underscores.</div>
-          </label>
-        </div>
-        <div class="profile-section">
-          <label>Display name
-            <input type="text" id="profile-display-name" autocomplete="name" placeholder="Your display name" />
-          </label>
-        </div>
-        <div class="profile-section">
-          <label>About
-            <textarea id="profile-about" placeholder="A short bio"></textarea>
-          </label>
-        </div>
-        <div class="profile-section">
-          <label>Photo
-            <div class="profile-photo-row">
-              <img class="profile-avatar-preview" id="profile-avatar-img" src="" alt="Profile photo preview" hidden />
-              <div class="profile-photo-actions">
-                <input type="file" id="profile-photo-file" accept="image/png,image/jpeg,image/webp,image/gif" />
-                <button class="btn" id="profile-photo-clear" type="button">Remove photo</button>
-              </div>
-            </div>
-            <input type="hidden" id="profile-image" />
-          </label>
-        </div>
-        <div class="modal-foot">
-          <span id="profile-status"></span>
-          <button class="btn" id="profile-save" type="button">Save Profile</button>
-        </div>
-      </div>
-      <div id="panel-saves" hidden>
+      <div id="panel-saves">
         <div class="modal-foot" style="margin-bottom: 10px;">
           <label style="flex:1;">
             <input type="text" id="save-name" placeholder="Name this build..." style="width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;" />
@@ -787,84 +619,6 @@
     </form>
   </div>
 
-  <div id="auth-modal" class="auth-modal" hidden>
-    <div class="auth-card">
-      <div class="auth-title">Tiny World <em>Builder</em></div>
-      <div class="auth-subtitle">Sign in to start building</div>
-      <div id="auth-error" class="auth-error" hidden></div>
-      <div id="auth-success" class="auth-success" hidden></div>
-
-      <!-- Login form -->
-      <form id="auth-login" class="auth-form" onsubmit="return false">
-        <div id="auth-oauth-login" class="auth-oauth-section" hidden>
-          <button class="auth-google-btn" id="auth-google-login" type="button">
-            <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.01 24.01 0 0 0 0 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-            Sign in with Google
-          </button>
-          <div class="auth-divider">or</div>
-        </div>
-        <label>Email
-          <input id="auth-email" type="email" autocomplete="email" placeholder="you@example.com" />
-        </label>
-        <label>Password
-          <input id="auth-password" type="password" autocomplete="current-password" placeholder="Your password" />
-        </label>
-        <button class="auth-btn" id="auth-login-btn" type="button">Sign in</button>
-        <div class="auth-footer">
-          <button class="auth-link" id="auth-show-signup" type="button">Create an account</button>
-          &middot;
-          <button class="auth-link" id="auth-show-forgot" type="button">Forgot password?</button>
-        </div>
-      </form>
-
-      <!-- Signup form -->
-      <form id="auth-signup" class="auth-form" hidden onsubmit="return false">
-        <div id="auth-oauth-signup" class="auth-oauth-section" hidden>
-          <button class="auth-google-btn" id="auth-google-signup" type="button">
-            <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.01 24.01 0 0 0 0 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-            Sign up with Google
-          </button>
-          <div class="auth-divider">or</div>
-        </div>
-        <label>Username
-          <input id="auth-signup-username" type="text" autocomplete="username" placeholder="lowercase_name" />
-        </label>
-        <label>Display name
-          <input id="auth-signup-name" type="text" autocomplete="name" placeholder="Your display name" />
-        </label>
-        <label>Email
-          <input id="auth-signup-email" type="email" autocomplete="email" placeholder="you@example.com" />
-        </label>
-        <label>Password
-          <input id="auth-signup-password" type="password" autocomplete="new-password" placeholder="Choose a password" />
-        </label>
-        <button class="auth-btn" id="auth-signup-btn" type="button">Create account</button>
-        <div class="auth-footer">
-          Already have an account? <button class="auth-link" id="auth-show-login" type="button">Sign in</button>
-        </div>
-      </form>
-
-      <!-- Forgot password form -->
-      <form id="auth-forgot" class="auth-form" hidden onsubmit="return false">
-        <label>Email
-          <input id="auth-forgot-email" type="email" autocomplete="email" placeholder="you@example.com" />
-        </label>
-        <button class="auth-btn" id="auth-forgot-btn" type="button">Send reset link</button>
-        <div class="auth-footer">
-          <button class="auth-link" id="auth-back-login" type="button">Back to sign in</button>
-        </div>
-      </form>
-
-      <!-- Password reset form (shown after recovery callback) -->
-      <form id="auth-reset" class="auth-form" hidden onsubmit="return false">
-        <input type="text" autocomplete="username" aria-hidden="true" tabindex="-1" style="display:none" />
-        <label>New password
-          <input id="auth-reset-password" type="password" autocomplete="new-password" placeholder="Choose a new password" />
-        </label>
-        <button class="auth-btn" id="auth-reset-btn" type="button">Set new password</button>
-      </form>
-    </div>
-  </div>
 
   <div id="welcome-modal" class="modal">
     <form class="modal-card welcome-card" role="dialog" aria-labelledby="welcome-title" onsubmit="return false">
@@ -1029,7 +783,6 @@
     Tools: <kbd>1-9</kbd> + letters · <kbd>E</kbd> erase · Right-drag / <kbd>Space</kbd> drag pan · <kbd>P</kbd> perspective
   </div>
 
-  <script src="auth.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
   /* =====================================================================
@@ -5891,160 +5644,38 @@
     });
   }
 
-  // -------- profile + saves --------
+  // -------- local saves --------
   function initAccountModal() {
-    const Auth = window.NetlifyAuth;
+    const BUILDS_KEY = 'tinyworld:builds';
     const modal = document.getElementById('account-modal');
     const closeBtn = document.getElementById('account-close');
-    const tabProfile = document.getElementById('tab-profile');
-    const tabSaves = document.getElementById('tab-saves');
-    const panelProfile = document.getElementById('panel-profile');
-    const panelSaves = document.getElementById('panel-saves');
-    const profileUsername = document.getElementById('profile-username');
-    const profileDisplayName = document.getElementById('profile-display-name');
-    const profileAbout = document.getElementById('profile-about');
-    const profileImage = document.getElementById('profile-image');
-    const profilePhotoFile = document.getElementById('profile-photo-file');
-    const profilePhotoClear = document.getElementById('profile-photo-clear');
-    const profileAvatarImg = document.getElementById('profile-avatar-img');
-    const profileSaveBtn = document.getElementById('profile-save');
-    const profileStatus = document.getElementById('profile-status');
     const saveCurrent = document.getElementById('save-current');
     const saveName = document.getElementById('save-name');
     const savesList = document.getElementById('saves-list');
     const savesEmpty = document.getElementById('saves-empty');
     const accountBtn = document.getElementById('account-btn');
 
-    let userProfile = null;
-    let userBuilds = [];
-
-    function showTab(tab) {
-      const isProfile = tab === 'profile';
-      tabProfile.classList.toggle('active', isProfile);
-      tabSaves.classList.toggle('active', !isProfile);
-      panelProfile.hidden = !isProfile;
-      panelSaves.hidden = isProfile;
-      if (!isProfile) loadBuilds();
-    }
-    tabProfile.addEventListener('click', () => showTab('profile'));
-    tabSaves.addEventListener('click', () => showTab('saves'));
-
-    function openModal() { modal.hidden = false; }
+    function openModal() { modal.hidden = false; loadBuilds(); }
     function closeModal() { modal.hidden = true; }
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 
-    async function getAccessToken() {
-      const user = await Auth.getUser();
-      if (!user) return null;
-      if (user.token && user.token.access_token) return user.token.access_token;
-      const m = document.cookie.match(/(?:^|; )nf_jwt=([^;]*)/);
-      if (m) return decodeURIComponent(m[1]);
-      return null;
+    function getBuilds() {
+      try { return JSON.parse(localStorage.getItem(BUILDS_KEY) || '[]'); } catch (_) { return []; }
     }
 
-    async function apiCall(path, method, body) {
-      try {
-        const opts = {
-          method,
-          headers: { 'Content-Type': 'application/json' },
-        };
-        if (body) opts.body = JSON.stringify(body);
-        const r = await fetch(path, opts);
-        const text = await r.text();
-        let data = null;
-        try { data = text ? JSON.parse(text) : null; } catch (_) {
-          data = { error: text || r.statusText || ('HTTP ' + r.status) };
-        }
-        if (!r.ok) return data || { error: r.statusText || ('HTTP ' + r.status) };
-        return data;
-      } catch (err) {
-        return { error: err.message || 'Network error' };
-      }
+    function saveBuilds(builds) {
+      try { localStorage.setItem(BUILDS_KEY, JSON.stringify(builds)); } catch (_) {}
     }
 
-    async function loadProfile() {
-      const p = await apiCall('/api/profile', 'GET');
-      if (p && p.id) {
-        userProfile = p;
-        profileUsername.value = p.username || '';
-        profileDisplayName.value = p.displayName || p.username || '';
-        profileAbout.value = p.about || '';
-        profileImage.value = p.image || '';
-        if (p.image) {
-          profileAvatarImg.src = p.image;
-          profileAvatarImg.hidden = false;
-        }
-      }
+    function loadBuilds() {
+      renderBuilds(getBuilds());
     }
 
-    function syncAvatarPreview() {
-      const image = profileImage.value.trim();
-      if (image) { profileAvatarImg.src = image; profileAvatarImg.hidden = false; }
-      else { profileAvatarImg.removeAttribute('src'); profileAvatarImg.hidden = true; }
-    }
-
-    profilePhotoFile.addEventListener('change', () => {
-      const file = profilePhotoFile.files && profilePhotoFile.files[0];
-      if (!file) return;
-      if (!file.type.startsWith('image/')) {
-        profileStatus.textContent = 'Please choose an image file';
-        profilePhotoFile.value = '';
-        return;
-      }
-      if (file.size > 500 * 1024) {
-        profileStatus.textContent = 'Photo must be under 500KB';
-        profilePhotoFile.value = '';
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = () => {
-        profileImage.value = String(reader.result || '');
-        syncAvatarPreview();
-        profileStatus.textContent = 'Photo ready — save profile to keep it';
-      };
-      reader.readAsDataURL(file);
-    });
-
-    profilePhotoClear.addEventListener('click', () => {
-      profileImage.value = '';
-      profilePhotoFile.value = '';
-      syncAvatarPreview();
-    });
-
-    profileSaveBtn.addEventListener('click', async () => {
-      const username = profileUsername.value.trim().toLowerCase();
-      const displayName = profileDisplayName.value.trim();
-      if (!username) { profileStatus.textContent = 'Username required'; return; }
-      if (!/^[a-z0-9_]{3,24}$/.test(username)) { profileStatus.textContent = 'Username must be 3-24 lowercase letters, numbers, underscores'; return; }
-      if (!displayName) { profileStatus.textContent = 'Display name required'; return; }
-      profileUsername.value = username;
-      profileStatus.textContent = 'Saving...';
-      const result = await apiCall('/api/profile', 'PUT', {
-        username,
-        displayName,
-        about: profileAbout.value.trim(),
-        image: profileImage.value.trim(),
-      });
-      if (result && (result.id || result.username)) {
-        userProfile = result;
-        profileStatus.textContent = 'Saved!';
-        setTimeout(() => profileStatus.textContent = '', 2000);
-      } else {
-        profileStatus.textContent = (result && result.error) || 'Save failed';
-      }
-    });
-
-    async function loadBuilds() {
-      const list = await apiCall('/api/builds', 'GET');
-      userBuilds = Array.isArray(list) ? list : [];
-      renderBuilds();
-    }
-
-    function renderBuilds() {
+    function renderBuilds(builds) {
       savesList.innerHTML = '';
-      savesEmpty.hidden = userBuilds.length > 0;
-      userBuilds.forEach(b => {
+      savesEmpty.hidden = builds.length > 0;
+      builds.forEach((b, idx) => {
         const li = document.createElement('li');
         const info = document.createElement('div');
         const nameSpan = document.createElement('div');
@@ -6052,7 +5683,7 @@
         nameSpan.textContent = b.name;
         const dateSpan = document.createElement('div');
         dateSpan.className = 'save-date';
-        dateSpan.textContent = new Date(b.updatedAt || b.created_at).toLocaleDateString();
+        dateSpan.textContent = new Date(b.updatedAt).toLocaleDateString();
         info.appendChild(nameSpan);
         info.appendChild(dateSpan);
         const actions = document.createElement('div');
@@ -6060,21 +5691,19 @@
         const loadBtn = document.createElement('button');
         loadBtn.textContent = 'Load';
         loadBtn.title = 'Load this build';
-        loadBtn.addEventListener('click', async (e) => {
+        loadBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const full = await apiCall('/api/builds?id=' + b.id, 'GET');
-          if (full && full.data) {
-            applyState(full.data);
-            closeModal();
-          }
+          if (b.data) { applyState(b.data); closeModal(); }
         });
         const delBtn = document.createElement('button');
         delBtn.textContent = '×';
         delBtn.title = 'Delete';
-        delBtn.addEventListener('click', async (e) => {
+        delBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           if (!confirm('Delete "' + b.name + '"?')) return;
-          await apiCall('/api/builds?id=' + b.id, 'DELETE');
+          const all = getBuilds();
+          all.splice(idx, 1);
+          saveBuilds(all);
           loadBuilds();
         });
         actions.appendChild(loadBtn);
@@ -6085,253 +5714,20 @@
       });
     }
 
-    saveCurrent.addEventListener('click', async () => {
-      if (!userProfile) { alert('Please save your profile first.'); showTab('profile'); return; }
+    saveCurrent.addEventListener('click', () => {
       const name = saveName.value.trim() || ('Build ' + new Date().toLocaleDateString());
       const cells = snapshotCells();
       const data = { v: STORAGE_VERSION, cells, cameraMode, toolId: selectedTool && selectedTool.id };
-      await apiCall('/api/builds', 'POST', { name, data });
+      const all = getBuilds();
+      const idx = all.findIndex(b => b.name === name);
+      const entry = { name, data, updatedAt: new Date().toISOString() };
+      if (idx >= 0) { all[idx] = entry; } else { all.unshift(entry); }
+      saveBuilds(all);
       saveName.value = '';
       loadBuilds();
     });
 
-    accountBtn.addEventListener('click', () => {
-      openModal();
-      loadProfile();
-    });
-  }
-
-  // -------- auth --------
-  function initAuth() {
-    const Auth = window.NetlifyAuth;
-    if (!Auth) {
-      bootApp();
-      return;
-    }
-
-    const modal = document.getElementById('auth-modal');
-    const errorEl = document.getElementById('auth-error');
-    const successEl = document.getElementById('auth-success');
-    const loginForm = document.getElementById('auth-login');
-    const signupForm = document.getElementById('auth-signup');
-    const forgotForm = document.getElementById('auth-forgot');
-    const resetForm = document.getElementById('auth-reset');
-    const logoutBtn = document.getElementById('auth-logout-btn');
-    const accountBtn = document.getElementById('account-btn');
-
-    function showError(msg) {
-      errorEl.textContent = msg;
-      errorEl.hidden = false;
-      successEl.hidden = true;
-    }
-
-    function showSuccess(msg) {
-      successEl.textContent = msg;
-      successEl.hidden = false;
-      errorEl.hidden = true;
-    }
-
-    function clearMessages() {
-      errorEl.hidden = true;
-      successEl.hidden = true;
-    }
-
-    function showForm(name) {
-      clearMessages();
-      loginForm.hidden = name !== 'login';
-      signupForm.hidden = name !== 'signup';
-      forgotForm.hidden = name !== 'forgot';
-      resetForm.hidden = name !== 'reset';
-      const subtitle = modal.querySelector('.auth-subtitle');
-      if (name === 'login') subtitle.textContent = 'Sign in to start building';
-      else if (name === 'signup') subtitle.textContent = 'Create your account';
-      else if (name === 'forgot') subtitle.textContent = 'Reset your password';
-      else if (name === 'reset') subtitle.textContent = 'Choose a new password';
-    }
-
-    function setLoading(btn, loading) {
-      btn.disabled = loading;
-      btn.textContent = loading ? 'Please wait…' : btn.dataset.label;
-    }
-
-    document.getElementById('auth-login-btn').dataset.label = 'Sign in';
-    document.getElementById('auth-signup-btn').dataset.label = 'Create account';
-    document.getElementById('auth-forgot-btn').dataset.label = 'Send reset link';
-    document.getElementById('auth-reset-btn').dataset.label = 'Set new password';
-
-    document.getElementById('auth-show-signup').addEventListener('click', () => showForm('signup'));
-    document.getElementById('auth-show-forgot').addEventListener('click', () => showForm('forgot'));
-    document.getElementById('auth-show-login').addEventListener('click', () => showForm('login'));
-    document.getElementById('auth-back-login').addEventListener('click', () => showForm('login'));
-
-    // Google OAuth
-    document.getElementById('auth-google-login').addEventListener('click', () => Auth.oauthLogin('google'));
-    document.getElementById('auth-google-signup').addEventListener('click', () => Auth.oauthLogin('google'));
-
-    // Show Google buttons if the provider is enabled
-    Auth.getSettings().then(settings => {
-      if (settings && settings.providers && settings.providers.google) {
-        document.getElementById('auth-oauth-login').hidden = false;
-        document.getElementById('auth-oauth-signup').hidden = false;
-      }
-    }).catch(() => {});
-
-    function enterApp() {
-      modal.hidden = true;
-      logoutBtn.hidden = false;
-      accountBtn.hidden = false;
-      bootApp();
-      initAccountModal();
-    }
-
-    // Login
-    document.getElementById('auth-login-btn').addEventListener('click', async () => {
-      const btn = document.getElementById('auth-login-btn');
-      const email = document.getElementById('auth-email').value.trim();
-      const password = document.getElementById('auth-password').value;
-      if (!email || !password) { showError('Please enter your email and password.'); return; }
-      setLoading(btn, true);
-      try {
-        await Auth.login(email, password);
-        enterApp();
-      } catch (err) {
-        if (err instanceof Auth.AuthError) {
-          showError(err.status === 401 ? 'Invalid email or password.' : err.message);
-        } else if (err instanceof Auth.MissingIdentityError) {
-          showError('Identity is not enabled on this site.');
-        } else {
-          showError('Something went wrong. Please try again.');
-        }
-      } finally {
-        setLoading(btn, false);
-      }
-    });
-
-    // Signup
-    document.getElementById('auth-signup-btn').addEventListener('click', async () => {
-      const btn = document.getElementById('auth-signup-btn');
-      const username = document.getElementById('auth-signup-username').value.trim().toLowerCase();
-      const name = document.getElementById('auth-signup-name').value.trim();
-      const email = document.getElementById('auth-signup-email').value.trim();
-      const password = document.getElementById('auth-signup-password').value;
-      if (!/^[a-z0-9_]{3,24}$/.test(username)) { showError('Username must be 3-24 lowercase letters, numbers, underscores.'); return; }
-      if (!name) { showError('Please enter a display name.'); return; }
-      if (!email || !password) { showError('Please enter an email and password.'); return; }
-      setLoading(btn, true);
-      try {
-        const user = await Auth.signup(email, password, { full_name: name, username, display_name: name });
-        if (user.emailVerified) {
-          enterApp();
-        } else {
-          showSuccess('Check your email to confirm your account, then sign in.');
-          showForm('login');
-        }
-      } catch (err) {
-        if (err instanceof Auth.AuthError) {
-          showError(err.status === 403 ? 'Signups are not allowed.' : err.message);
-        } else if (err instanceof Auth.MissingIdentityError) {
-          showError('Identity is not enabled on this site.');
-        } else {
-          showError('Something went wrong. Please try again.');
-        }
-      } finally {
-        setLoading(btn, false);
-      }
-    });
-
-    // Forgot password
-    document.getElementById('auth-forgot-btn').addEventListener('click', async () => {
-      const btn = document.getElementById('auth-forgot-btn');
-      const email = document.getElementById('auth-forgot-email').value.trim();
-      if (!email) { showError('Please enter your email address.'); return; }
-      setLoading(btn, true);
-      try {
-        await Auth.requestPasswordRecovery(email);
-        showSuccess('Check your email for a password reset link.');
-      } catch (err) {
-        if (err instanceof Auth.AuthError) {
-          showError(err.message);
-        } else {
-          showError('Something went wrong. Please try again.');
-        }
-      } finally {
-        setLoading(btn, false);
-      }
-    });
-
-    // Password reset
-    document.getElementById('auth-reset-btn').addEventListener('click', async () => {
-      const btn = document.getElementById('auth-reset-btn');
-      const password = document.getElementById('auth-reset-password').value;
-      if (!password) { showError('Please choose a new password.'); return; }
-      setLoading(btn, true);
-      try {
-        await Auth.updateUser({ password });
-        showSuccess('Password updated. You are now signed in.');
-        setTimeout(enterApp, 1200);
-      } catch (err) {
-        if (err instanceof Auth.AuthError) {
-          showError(err.message);
-        } else {
-          showError('Something went wrong. Please try again.');
-        }
-      } finally {
-        setLoading(btn, false);
-      }
-    });
-
-    // Logout
-    logoutBtn.addEventListener('click', async () => {
-      try {
-        await Auth.logout();
-      } catch (_) {}
-      logoutBtn.hidden = true;
-      accountBtn.hidden = true;
-      modal.hidden = false;
-      showForm('login');
-    });
-
-    // Handle auth callbacks (OAuth, recovery, confirmation, invite)
-    async function processCallback() {
-      try {
-        const result = await Auth.handleAuthCallback();
-        if (!result) return false;
-        switch (result.type) {
-          case 'oauth':
-          case 'confirmation':
-            enterApp();
-            return true;
-          case 'recovery':
-            modal.hidden = false;
-            showForm('reset');
-            return true;
-          case 'invite':
-            modal.hidden = false;
-            showSuccess('Set a password to accept your invite.');
-            showForm('reset');
-            return true;
-          case 'email_change':
-            modal.hidden = false;
-            showSuccess('Email address updated.');
-            return true;
-        }
-      } catch (err) {
-        if (err instanceof Auth.AuthError) showError(err.message);
-      }
-      return false;
-    }
-
-    // Check existing session or callback
-    (async () => {
-      const handled = await processCallback();
-      if (handled) return;
-      const user = await Auth.getUser();
-      if (user) {
-        enterApp();
-      } else {
-        modal.hidden = false;
-      }
-    })();
+    accountBtn.addEventListener('click', openModal);
   }
 
   // -------- boot --------
@@ -6349,7 +5745,8 @@
     requestAnimationFrame(animate);
   }
 
-  initAuth();
+  bootApp();
+  initAccountModal();
   </script>
 </body>
 </html>
